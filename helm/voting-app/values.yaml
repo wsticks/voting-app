@@ -1,0 +1,40 @@
+replicaCount: 1
+
+# Leave empty unless the GHCR packages are private.
+imagePullSecret: ""
+
+optionA: Cats
+optionB: Dogs
+
+vote:
+  image:
+    repository: voting-vote
+    tag: local
+    pullPolicy: IfNotPresent
+
+result:
+  image:
+    repository: voting-result
+    tag: local
+    pullPolicy: IfNotPresent
+
+worker:
+  image:
+    repository: voting-worker
+    tag: local
+    pullPolicy: IfNotPresent
+
+redis:
+  image:
+    repository: redis
+    tag: 7.2.7-alpine
+
+# Same password the compose file has always used. It is not a cloud credential.
+# Override it with --set if you put this anywhere public, and keep the real one out of git.
+db:
+  image:
+    repository: postgres
+    tag: 15.8-alpine
+  user: postgres
+  password: postgres
+  name: postgres

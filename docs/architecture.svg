@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560">
+  <rect width="960" height="560" fill="#f7f5f0"/>
+  <text x="32" y="40" font-family="Georgia, serif" font-size="22" fill="#1c1c1c">Voting app, from a click to a row in Postgres</text>
+  <text x="32" y="64" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#444">Capstone 1. The bottom row is the path a push takes.</text>
+
+  <rect x="32" y="96" width="120" height="56" rx="4" fill="#fff" stroke="#222"/>
+  <text x="92" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14">browser</text>
+
+  <rect x="200" y="88" width="150" height="72" rx="4" fill="#fff" stroke="#222"/>
+  <text x="275" y="116" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14">vote</text>
+  <text x="275" y="136" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#444">Python, port 8080</text>
+
+  <rect x="400" y="88" width="130" height="72" rx="4" fill="#fff" stroke="#222"/>
+  <text x="465" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14">Redis</text>
+
+  <rect x="580" y="88" width="150" height="72" rx="4" fill="#fff" stroke="#222"/>
+  <text x="655" y="116" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14">worker</text>
+  <text x="655" y="136" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#444">.NET</text>
+
+  <rect x="780" y="88" width="148" height="72" rx="4" fill="#fff" stroke="#222"/>
+  <text x="854" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14">Postgres</text>
+
+  <rect x="400" y="210" width="150" height="72" rx="4" fill="#fff" stroke="#222"/>
+  <text x="475" y="238" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14">result</text>
+  <text x="475" y="258" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#444">Node, reads Postgres</text>
+
+  <line x1="152" y1="124" x2="200" y2="124" stroke="#222" marker-end="url(#arrow)"/>
+  <line x1="350" y1="124" x2="400" y2="124" stroke="#222" marker-end="url(#arrow)"/>
+  <line x1="530" y1="124" x2="580" y2="124" stroke="#222" marker-end="url(#arrow)"/>
+  <line x1="730" y1="124" x2="780" y2="124" stroke="#222" marker-end="url(#arrow)"/>
+  <line x1="854" y1="160" x2="854" y2="200" stroke="#222"/>
+  <line x1="854" y1="200" x2="550" y2="246" stroke="#222" marker-end="url(#arrow)"/>
+
+  <text x="32" y="330" font-family="Georgia, serif" font-size="16">How a push gets to the cluster</text>
+
+  <rect x="32" y="352" width="150" height="56" rx="4" fill="#fff" stroke="#222"/>
+  <text x="107" y="384" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13">git push</text>
+
+  <rect x="214" y="352" width="170" height="56" rx="4" fill="#fff" stroke="#222"/>
+  <text x="299" y="376" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13">GitHub Actions</text>
+  <text x="299" y="394" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#444">test, Trivy, build</text>
+
+  <rect x="416" y="352" width="140" height="56" rx="4" fill="#fff" stroke="#222"/>
+  <text x="486" y="384" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13">GHCR :sha</text>
+
+  <rect x="588" y="352" width="140" height="56" rx="4" fill="#fff" stroke="#222"/>
+  <text x="658" y="384" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13">Helm</text>
+
+  <rect x="760" y="352" width="168" height="56" rx="4" fill="#fff" stroke="#222"/>
+  <text x="844" y="376" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13">EKS</text>
+  <text x="844" y="394" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#444">default VPC</text>
+
+  <line x1="182" y1="380" x2="214" y2="380" stroke="#222" marker-end="url(#arrow)"/>
+  <line x1="384" y1="380" x2="416" y2="380" stroke="#222" marker-end="url(#arrow)"/>
+  <line x1="556" y1="380" x2="588" y2="380" stroke="#222" marker-end="url(#arrow)"/>
+  <line x1="728" y1="380" x2="760" y2="380" stroke="#222" marker-end="url(#arrow)"/>
+
+  <text x="32" y="460" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#333">Terraform creates the cluster. Destroying it and applying again builds the same thing.</text>
+  <text x="32" y="482" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#333">A bad Helm release is undone with helm rollback. Nothing in this picture stores a cloud key.</text>
+  <text x="32" y="520" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#666">Started from dockersamples/example-voting-app.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#222"/>
+    </marker>
+  </defs>
+</svg>

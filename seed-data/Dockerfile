@@ -1,16 +1,19 @@
-FROM python:3.9-slim
+FROM python:3.9.20-slim-bookworm
 
-# add apache bench (ab) tool
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    apache2-utils \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y --no-install-recommends apache2-utils \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --gid 10001 app \
+    && useradd --uid 10001 --gid 10001 --create-home --shell /usr/sbin/nologin app
 
 WORKDIR /seed
 
 COPY . .
 
-# create POST data files with ab friendly formats
-RUN python make-data.py
+RUN python make-data.py \
+    && chmod +x /seed/generate-votes.sh \
+    && chown -R app:app /seed
+
+USER app
 
 CMD ["/seed/generate-votes.sh"]

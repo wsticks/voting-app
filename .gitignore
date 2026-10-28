@@ -4,3 +4,10 @@ bin/
 obj/
 .vs/
 node_modules/
+.pytest_cache/
+.venv/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example

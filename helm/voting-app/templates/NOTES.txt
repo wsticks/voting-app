@@ -1,0 +1,8 @@
+Vote page:
+  kubectl port-forward svc/vote -n {{ .Release.Namespace }} 8080:80
+
+Result page:
+  kubectl port-forward svc/result -n {{ .Release.Namespace }} 8081:80
+
+The database password is the sample one from values.yaml unless you overrode it.
+Votes live on an emptyDir, so they go away if the db pod is rescheduled.

@@ -1,0 +1,5 @@
+# Used only for the rollback demo. The result pod should sit in ImagePullBackOff.
+result:
+  image:
+    tag: this-tag-does-not-exist
+    pullPolicy: Always

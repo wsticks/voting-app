@@ -16,8 +16,8 @@ namespace Worker
         {
             try
             {
-                var pgsql = OpenDbConnection("Server=db;Username=postgres;Password=postgres;");
-                var redisConn = OpenRedisConnection("redis");
+                var pgsql = OpenDbConnection(PgConnectionString());
+                var redisConn = OpenRedisConnection(RedisHostname());
                 var redis = redisConn.GetDatabase();
 
                 // Keep alive is not implemented in Npgsql yet. This workaround was recommended:
@@ -34,7 +34,7 @@ namespace Worker
                     // Reconnect redis if down
                     if (redisConn == null || !redisConn.IsConnected) {
                         Console.WriteLine("Reconnecting Redis");
-                        redisConn = OpenRedisConnection("redis");
+                        redisConn = OpenRedisConnection(RedisHostname());
                         redis = redisConn.GetDatabase();
                     }
                     string json = redis.ListLeftPopAsync("votes").Result;
@@ -46,7 +46,7 @@ namespace Worker
                         if (!pgsql.State.Equals(System.Data.ConnectionState.Open))
                         {
                             Console.WriteLine("Reconnecting DB");
-                            pgsql = OpenDbConnection("Server=db;Username=postgres;Password=postgres;");
+                            pgsql = OpenDbConnection(PgConnectionString());
                         }
                         else
                         { // Normal +1 vote requested
@@ -64,6 +64,19 @@ namespace Worker
                 Console.Error.WriteLine(ex.ToString());
                 return 1;
             }
+        }
+
+        private static string PgConnectionString()
+        {
+            var host = Environment.GetEnvironmentVariable("PGHOST") ?? "db";
+            var user = Environment.GetEnvironmentVariable("PGUSER") ?? "postgres";
+            var pass = Environment.GetEnvironmentVariable("PGPASSWORD") ?? "postgres";
+            return $"Server={host};Username={user};Password={pass};";
+        }
+
+        private static string RedisHostname()
+        {
+            return Environment.GetEnvironmentVariable("REDIS_HOST") ?? "redis";
         }
 
         private static NpgsqlConnection OpenDbConnection(string connectionString)
